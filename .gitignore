@@ -1,0 +1,5 @@
+node_modules/
+uploads/
+reports/
+db/database.json
+.env
