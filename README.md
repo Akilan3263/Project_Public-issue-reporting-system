@@ -28,6 +28,7 @@ Issue categorisation (pothole, accident, flooding, etc.)
 Severity selection (Low → Critical)
 Anonymous reporting option
 Reference number generation
+
 🛠 Admin Dashboard (Control Room)
 ⚡ Real-time updates using WebSockets
 📊 KPI cards (Total, In Progress, Critical, etc.)
@@ -39,6 +40,7 @@ Notes system
 📡 Live activity log
 🗺 Map-based report tracking
 🚨 Critical alert prioritisation
+
 🏗 System Architecture
 Public UI (HTML/CSS/JS)
         ↓
@@ -47,25 +49,22 @@ Public UI (HTML/CSS/JS)
    JSON Database (LowDB / File Storage)
         ↓
  Admin Dashboard (WebSocket Live Updates)
+ 
 🛠 Tech Stack
-Layer	Technology
-Frontend	HTML, CSS, JavaScript
-Backend	Node.js, Express.js
-Real-time	WebSocket (ws)
-Storage	JSON-based DB
-File Upload	Multer
-Security	Helmet, Rate Limiting
-Maps	OpenStreetMap
+<img width="892" height="511" alt="image" src="https://github.com/user-attachments/assets/7a4a0003-66a3-4bcf-957b-48d391732d7b" />
+
+
 ⚙️ Installation & Setup
 git clone https://github.com/Akilan3263/Project_Public-issue-reporting-system.git
 cd Project_Public-issue-reporting-system
 npm install
 node server.js
+
 🚀 Usage
 Interface	URL
 Public Reporting	http://localhost:3000
-
 Admin Dashboard	http://localhost:3000/admin
+
 📁 Project Structure
 roadwatch/
 ├── admin/              # Admin dashboard UI
@@ -75,6 +74,7 @@ roadwatch/
 ├── package.json        # Dependencies
 ├── .gitignore
 └── README.md
+
 🔐 Future Enhancements
 🔑 Admin authentication system
 ☁️ Cloud database (MongoDB / Firebase)
@@ -82,15 +82,15 @@ roadwatch/
 🤖 AI-based issue classification
 🎤 Voice-based reporting
 🌍 Multi-language support
+
 📌 Use Cases
 Smart City infrastructure
 Government civic reporting systems
 Traffic management authorities
 Emergency response coordination
-👨‍💻 Author
 
+👨‍💻 Author
 Akilan JD
 🎓 MSc Artificial Intelligence — Brunel University London
-
 🔗 GitHub: https://github.com/Akilan3263
-💼 LinkedIn: (add your link here)
+💼 LinkedIn: https://www.linkedin.com/in/akilan-jd/
