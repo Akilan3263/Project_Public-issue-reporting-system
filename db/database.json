@@ -1,0 +1,153 @@
+{
+  "reports": [
+    {
+      "id": "17a1362d-ae6d-4dc8-becc-0b9bed1dbf2b",
+      "reference": "RW-MO1I5UKI",
+      "full_name": "Anonymous",
+      "email": null,
+      "phone": null,
+      "anonymous": true,
+      "issue_type": "road_damage",
+      "severity": "medium",
+      "description": "bus didnt stop in red light",
+      "road_name": "Topping Lane",
+      "postcode": "UB8 3PH",
+      "latitude": 51.5325,
+      "longitude": -0.47821,
+      "images": [],
+      "status": "resolved",
+      "assigned_officer": "",
+      "assigned_unit": null,
+      "notes": [],
+      "created_at": "2026-04-16T13:15:58.338Z",
+      "updated_at": "2026-04-16T13:16:21.866Z",
+      "resolved_at": "2026-04-16T13:16:21.866Z"
+    },
+    {
+      "id": "277dd8dc-b61d-4e4a-a1d0-4448d00b1cdf",
+      "reference": "RW-MO1DOYUW",
+      "full_name": "Akilan",
+      "email": "trexak111@gmail.com",
+      "phone": "",
+      "anonymous": false,
+      "issue_type": "other",
+      "severity": "medium",
+      "description": "A car just drove past red signal, almost hit a bus.",
+      "road_name": "Station road, Uxbridge",
+      "postcode": "UB8 3FG",
+      "latitude": 51.5325,
+      "longitude": -0.47821,
+      "images": [
+        "/uploads/1776337852270-54ee6205.jpg"
+      ],
+      "status": "resolved",
+      "assigned_officer": "PC James Harper",
+      "assigned_unit": null,
+      "notes": [
+        {
+          "id": "2b9240dc-2995-4c06-9e61-5e7765e024d5",
+          "text": "Please take action!",
+          "author": "Trevor Santa De",
+          "timestamp": "2026-04-16T11:11:53.592Z"
+        }
+      ],
+      "created_at": "2026-04-16T11:10:52.280Z",
+      "updated_at": "2026-04-16T11:16:32.560Z",
+      "resolved_at": "2026-04-16T11:16:32.560Z"
+    }
+  ],
+  "officers": [
+    {
+      "id": "off-001",
+      "name": "PC James Harper",
+      "badge": "MET-4421",
+      "unit": "Traffic",
+      "status": "on_duty",
+      "phone": "07700 900001"
+    },
+    {
+      "id": "off-002",
+      "name": "PC Sarah Chen",
+      "badge": "MET-4422",
+      "unit": "Traffic",
+      "status": "available",
+      "phone": "07700 900002"
+    },
+    {
+      "id": "off-003",
+      "name": "Sgt David Okafor",
+      "badge": "MET-4430",
+      "unit": "Response",
+      "status": "available",
+      "phone": "07700 900003"
+    },
+    {
+      "id": "off-004",
+      "name": "PC Emma Williams",
+      "badge": "MET-4415",
+      "unit": "Highways",
+      "status": "on_duty",
+      "phone": "07700 900004"
+    },
+    {
+      "id": "off-005",
+      "name": "Paramedic Unit 12",
+      "badge": "AMBU-012",
+      "unit": "Ambulance",
+      "status": "available",
+      "phone": "07700 900005"
+    },
+    {
+      "id": "off-006",
+      "name": "Fire Engine FE-07",
+      "badge": "FIRE-007",
+      "unit": "Fire",
+      "status": "available",
+      "phone": "07700 900006"
+    }
+  ],
+  "activity_log": [
+    {
+      "id": "cbd5fea3-7b19-4428-93bf-a0e4f40bc1d3",
+      "report_id": "17a1362d-ae6d-4dc8-becc-0b9bed1dbf2b",
+      "action": "REPORT_UPDATED",
+      "detail": "Status changed to resolved",
+      "timestamp": "2026-04-16T13:16:21.866Z"
+    },
+    {
+      "id": "b3389460-35b8-46f0-a0b5-a9d653ab8b18",
+      "report_id": "17a1362d-ae6d-4dc8-becc-0b9bed1dbf2b",
+      "action": "REPORT_SUBMITTED",
+      "detail": "New road_damage report submitted by Anonymous",
+      "timestamp": "2026-04-16T13:15:58.338Z"
+    },
+    {
+      "id": "e863fd01-8da1-4bfc-9dec-ccc7622cccef",
+      "report_id": "277dd8dc-b61d-4e4a-a1d0-4448d00b1cdf",
+      "action": "REPORT_UPDATED",
+      "detail": "Status changed to resolved | Assigned to PC James Harper",
+      "timestamp": "2026-04-16T11:16:32.561Z"
+    },
+    {
+      "id": "1a6dd4f4-d35a-4fb3-a517-9469fdbf59e4",
+      "report_id": "277dd8dc-b61d-4e4a-a1d0-4448d00b1cdf",
+      "action": "REPORT_UPDATED",
+      "detail": "Assigned to PC James Harper",
+      "timestamp": "2026-04-16T11:12:11.638Z"
+    },
+    {
+      "id": "574487b9-f3ba-4d9b-90f9-2e32170130e8",
+      "report_id": "277dd8dc-b61d-4e4a-a1d0-4448d00b1cdf",
+      "action": "REPORT_UPDATED",
+      "detail": "Status changed to in_progress | Assigned to PC James Harper | Note added",
+      "timestamp": "2026-04-16T11:11:53.592Z"
+    },
+    {
+      "id": "ee10f67a-b4ee-46d7-a7e9-61d798a71bc8",
+      "report_id": "277dd8dc-b61d-4e4a-a1d0-4448d00b1cdf",
+      "action": "REPORT_SUBMITTED",
+      "detail": "New other report submitted by Akilan",
+      "timestamp": "2026-04-16T11:10:52.280Z"
+    }
+  ]
+}

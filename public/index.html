@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report a Road Issue – RoadWatch UK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=GDS+Transport:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --govuk-blue: #1d70b8;
+    --govuk-blue-dark: #003078;
+    --govuk-black: #0b0c0c;
+    --govuk-grey: #505a5f;
+    --govuk-grey-light: #f3f2f1;
+    --govuk-grey-mid: #b1b4b6;
+    --govuk-yellow: #fd0;
+    --govuk-green: #00703c;
+    --govuk-red: #d4351c;
+    --govuk-orange: #f47738;
+    --govuk-white: #ffffff;
+    --focus: #fd0;
+    --border: #b1b4b6;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "GDS Transport", "Helvetica Neue", Arial, sans-serif;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--govuk-black);
+    background: var(--govuk-white);
+  }
+  .cookie-banner {
+    background: var(--govuk-grey-light);
+    border-bottom: 1px solid var(--border);
+    padding: 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 16px;
+  }
+  .cookie-banner button {
+    background: var(--govuk-blue); color: #fff; border: none;
+    padding: 8px 18px; font-size: 16px; cursor: pointer; margin-left: 12px;
+    font-family: inherit;
+  }
+  .cookie-banner button:hover { background: var(--govuk-blue-dark); }
+
+  .govuk-header {
+    background: var(--govuk-black);
+    border-bottom: 10px solid var(--govuk-blue);
+    padding: 12px 0;
+  }
+  .govuk-header__inner {
+    max-width: 960px; margin: 0 auto; padding: 0 30px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .govuk-header__logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .crown-logo { width: 36px; height: 36px; fill: #fff; }
+  .govuk-header__logotype-text {
+    color: #fff; font-size: 30px; font-weight: 700; letter-spacing: -0.5px;
+  }
+  .govuk-header__logotype-text span { font-size: 18px; font-weight: 400; display: block; }
+  .govuk-header__nav a {
+    color: #fff; text-decoration: none; font-size: 16px; margin-left: 20px;
+  }
+  .govuk-header__nav a:hover { text-decoration: underline; }
+
+  .phase-banner {
+    background: var(--govuk-grey-light);
+    border-bottom: 1px solid var(--border);
+    padding: 6px 30px;
+    max-width: 960px; margin: 0 auto;
+    font-size: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .phase-tag {
+    background: var(--govuk-blue); color: #fff;
+    font-size: 14px; font-weight: 700; padding: 2px 8px; letter-spacing: 1px;
+  }
+  .breadcrumb {
+    max-width: 960px; margin: 0 auto; padding: 12px 30px;
+    font-size: 16px; color: var(--govuk-grey);
+  }
+  .breadcrumb a { color: var(--govuk-blue); }
+
+  main { max-width: 960px; margin: 0 auto; padding: 30px 30px 80px; }
+  h1 { font-size: 48px; font-weight: 700; line-height: 1.1; margin-bottom: 10px; }
+  .lede { font-size: 24px; color: var(--govuk-grey); margin-bottom: 40px; }
+
+  .progress-bar {
+    display: flex; gap: 0; margin-bottom: 40px;
+    border: 2px solid var(--border); overflow: hidden;
+  }
+  .progress-step {
+    flex: 1; padding: 12px 16px; font-size: 15px; font-weight: 700;
+    text-align: center; background: var(--govuk-grey-light); color: var(--govuk-grey);
+    border-right: 2px solid var(--border); position: relative;
+    transition: all 0.3s;
+  }
+  .progress-step:last-child { border-right: none; }
+  .progress-step.active { background: var(--govuk-blue); color: #fff; }
+  .progress-step.done { background: var(--govuk-green); color: #fff; }
+  .progress-step span { display: block; font-size: 12px; font-weight: 400; opacity: 0.8; }
+
+  .form-section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .form-section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-title {
+    font-size: 27px; font-weight: 700; margin-bottom: 6px;
+    padding-bottom: 6px; border-bottom: 3px solid var(--govuk-blue);
+  }
+  .section-hint { font-size: 16px; color: var(--govuk-grey); margin-bottom: 30px; }
+
+  .govuk-form-group { margin-bottom: 28px; }
+  .govuk-label { font-weight: 700; display: block; margin-bottom: 6px; font-size: 19px; }
+  .govuk-hint { font-size: 16px; color: var(--govuk-grey); margin-bottom: 8px; }
+  .govuk-input, .govuk-textarea, .govuk-select {
+    border: 2px solid var(--govuk-black);
+    width: 100%; padding: 10px 12px;
+    font-size: 19px; font-family: inherit;
+    border-radius: 0;
+  }
+  .govuk-input:focus, .govuk-textarea:focus, .govuk-select:focus {
+    outline: 3px solid var(--focus);
+    border-color: var(--govuk-black);
+  }
+  .govuk-input.error, .govuk-textarea.error { border-color: var(--govuk-red); }
+  .govuk-textarea { min-height: 140px; resize: vertical; }
+
+  .issue-type-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px;
+    margin-bottom: 24px;
+  }
+  .issue-card {
+    border: 2px solid var(--border); padding: 16px 12px; text-align: center;
+    cursor: pointer; transition: all 0.2s; font-size: 15px; font-weight: 700;
+    background: var(--govuk-white);
+  }
+  .issue-card:hover { border-color: var(--govuk-blue); background: #e8f1fb; }
+  .issue-card.selected { border-color: var(--govuk-blue); background: var(--govuk-blue); color: #fff; }
+  .issue-card .icon { font-size: 32px; display: block; margin-bottom: 8px; }
+
+  .severity-grid { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+  .severity-btn {
+    flex: 1; min-width: 120px; padding: 14px; text-align: center; cursor: pointer;
+    border: 3px solid var(--border); font-weight: 700; font-size: 16px;
+    transition: all 0.2s; background: var(--govuk-white);
+    font-family: inherit;
+  }
+  .severity-btn span { display: block; font-size: 12px; font-weight: 400; margin-top: 4px; }
+  .severity-btn[data-sev="low"]:hover, .severity-btn[data-sev="low"].selected { border-color: var(--govuk-green); background: #e3f2e9; color: var(--govuk-green); }
+  .severity-btn[data-sev="medium"]:hover, .severity-btn[data-sev="medium"].selected { border-color: var(--govuk-orange); background: #fef0e7; color: var(--govuk-orange); }
+  .severity-btn[data-sev="high"]:hover, .severity-btn[data-sev="high"].selected { border-color: var(--govuk-red); background: #fde8e5; color: var(--govuk-red); }
+  .severity-btn[data-sev="critical"]:hover, .severity-btn[data-sev="critical"].selected { border-color: #6e0000; background: #fde8e5; color: #6e0000; }
+
+  .location-panel {
+    border: 2px solid var(--border); padding: 20px; margin-bottom: 20px;
+    background: var(--govuk-grey-light);
+  }
+  #map-preview {
+    width: 100%; height: 280px; border: 2px solid var(--border);
+    background: #e8e8e8; margin-top: 12px; position: relative;
+    overflow: hidden;
+  }
+  #map-preview iframe { width: 100%; height: 100%; border: none; }
+  .map-overlay {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.9); flex-direction: column; gap: 12px;
+    font-size: 16px; color: var(--govuk-grey);
+  }
+  .map-overlay .pin { font-size: 40px; }
+
+  .loc-status {
+    padding: 12px 16px; font-size: 16px; margin-bottom: 12px;
+    border-left: 4px solid var(--govuk-grey-mid); background: var(--govuk-grey-light);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .loc-status.success { border-color: var(--govuk-green); background: #e3f2e9; }
+  .loc-status.error { border-color: var(--govuk-red); background: #fde8e5; }
+  .loc-status.loading { border-color: var(--govuk-blue); background: #e8f1fb; }
+
+  .upload-area {
+    border: 3px dashed var(--border); padding: 40px; text-align: center;
+    cursor: pointer; transition: all 0.2s; position: relative; background: var(--govuk-grey-light);
+  }
+  .upload-area:hover, .upload-area.dragover { border-color: var(--govuk-blue); background: #e8f1fb; }
+  .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+  .upload-icon { font-size: 48px; margin-bottom: 12px; }
+  .upload-hint { font-size: 16px; color: var(--govuk-grey); margin-top: 8px; }
+  .image-previews { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .img-thumb {
+    width: 100px; height: 100px; object-fit: cover; border: 2px solid var(--border);
+    position: relative;
+  }
+  .img-wrap { position: relative; display: inline-block; }
+  .img-remove {
+    position: absolute; top: -8px; right: -8px; background: var(--govuk-red);
+    color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px;
+    cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+
+  .govuk-button {
+    background: var(--govuk-green); border: none; color: #fff;
+    padding: 13px 28px; font-size: 19px; font-weight: 700; font-family: inherit;
+    cursor: pointer; box-shadow: 0 2px 0 #003a18;
+    transition: background 0.2s, transform 0.1s;
+    text-decoration: none; display: inline-block;
+  }
+  .govuk-button:hover { background: #005a30; }
+  .govuk-button:active { transform: translateY(2px); box-shadow: none; }
+  .govuk-button--secondary { background: var(--govuk-grey-light); color: var(--govuk-black); box-shadow: 0 2px 0 #6a737d; }
+  .govuk-button--secondary:hover { background: #dbdad9; }
+  .btn-row { display: flex; gap: 12px; align-items: center; margin-top: 32px; flex-wrap: wrap; }
+
+  .anon-toggle {
+    display: flex; align-items: center; gap: 12px; padding: 16px;
+    background: var(--govuk-grey-light); border: 2px solid var(--border); margin-bottom: 24px;
+    cursor: pointer;
+  }
+  .toggle-switch {
+    width: 52px; height: 28px; background: var(--govuk-grey-mid); border-radius: 14px;
+    position: relative; transition: background 0.2s; flex-shrink: 0;
+  }
+  .toggle-switch.on { background: var(--govuk-green); }
+  .toggle-knob {
+    position: absolute; top: 4px; left: 4px; width: 20px; height: 20px;
+    background: #fff; border-radius: 50%; transition: left 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,.3);
+  }
+  .toggle-switch.on .toggle-knob { left: 28px; }
+
+  .review-table { width: 100%; border-collapse: collapse; font-size: 17px; }
+  .review-table th, .review-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); text-align: left; }
+  .review-table th { background: var(--govuk-grey-light); width: 35%; font-weight: 700; }
+
+  #confirmation { display: none; text-align: center; padding: 60px 20px; }
+  .confirm-icon { font-size: 80px; margin-bottom: 20px; }
+  .confirm-ref {
+    background: var(--govuk-blue); color: #fff; padding: 20px 40px;
+    font-size: 32px; font-weight: 700; letter-spacing: 2px; display: inline-block; margin: 20px 0;
+  }
+
+  .inset { border-left: 4px solid var(--govuk-grey-mid); padding: 12px 20px; margin: 20px 0; font-size: 17px; }
+  .inset.important { border-color: var(--govuk-red); background: #fde8e5; }
+  .inset.info { border-color: var(--govuk-blue); background: #e8f1fb; }
+
+  footer {
+    background: var(--govuk-black); color: var(--govuk-grey-mid);
+    padding: 30px; font-size: 16px; margin-top: 60px;
+  }
+  footer a { color: var(--govuk-grey-mid); }
+  .footer-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 40px; flex-wrap: wrap; }
+
+  .error-summary {
+    border: 4px solid var(--govuk-red); padding: 20px;
+    margin-bottom: 28px; display: none;
+  }
+  .error-summary h2 { font-size: 24px; margin-bottom: 12px; color: var(--govuk-red); }
+  .error-summary ul { padding-left: 20px; }
+  .error-message { color: var(--govuk-red); font-size: 16px; font-weight: 700; margin-top: 4px; display: block; }
+
+  .spinner { display: none; align-items: center; gap: 10px; font-size: 17px; color: var(--govuk-blue); }
+  .spinner.active { display: flex; }
+  .spin { width: 20px; height: 20px; border: 3px solid var(--govuk-grey-light); border-top-color: var(--govuk-blue); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 32px; }
+    .issue-type-grid { grid-template-columns: repeat(2, 1fr); }
+    main { padding: 20px 16px; }
+    .govuk-header__inner { padding: 0 16px; }
+    .govuk-button { width: 100%; text-align: center; }
+    .btn-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cookie-banner" id="cookieBanner">
+  <span>We use essential cookies to make this service work. <a href="privacy.html">View cookie policy</a></span>
+  <div>
+    <button onclick="document.getElementById('cookieBanner').remove()">Accept cookies</button>
+    <button onclick="document.getElementById('cookieBanner').remove()" style="background:#505a5f;">Reject optional cookies</button>
+  </div>
+</div>
+
+<header class="govuk-header">
+  <div class="govuk-header__inner">
+    <a class="govuk-header__logo" href="index.html">
+      <svg class="crown-logo" viewBox="0 0 132 97" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#fff" d="M18.5 0C16.7 0 14.9.7 13.5 2L2 13.5C.7 14.9 0 16.7 0 18.5v60C0 83 4.7 87.7 10.2 88.9l25.4 6.4c5.5 1.2 11 1.7 16.4 1.7H80c5.4 0 10.9-.5 16.4-1.7l25.4-6.4C127.3 87.7 132 83 132 78.5v-60C132 16.7 131.3 14.9 130 13.5L118.5 2C117.1.7 115.3 0 113.5 0h-95zm9.5 16h76c1.1 0 2 .9 2 2v48c0 1.1-.9 2-2 2H28c-1.1 0-2-.9-2-2V18c0-1.1.9-2 2-2z"/>
+      </svg>
+      <span class="govuk-header__logotype-text">
+        RoadWatch UK
+        <span>Road Issue Reporting Service</span>
+      </span>
+    </a>
+    <nav class="govuk-header__nav">
+      <a href="help.html">Help</a>
+    </nav>
+  </div>
+</header>
+
+<div style="background:#f3f2f1; border-bottom:1px solid #b1b4b6;">
+  <div class="phase-banner">
+    <span class="phase-tag">BETA</span>
+    <span>This is a new service – your <a href="feedback.html">feedback</a> will help us improve it.</span>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span>Roads</span>
+  <span>Report a road issue</span>
+</div>
+
+<main>
+  <h1>Report a road issue</h1>
+  <p class="lede">Use this service to report road damage, flooding, accidents or hazards to your local authorities.</p>
+
+  <div class="inset info">
+    <strong>Emergency?</strong> If there is an immediate danger to life, call <strong>999</strong>. For non-emergency police, call <strong>101</strong>.
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-step active" id="step-1">1 <span>Issue Type</span></div>
+    <div class="progress-step" id="step-2">2 <span>Location</span></div>
+    <div class="progress-step" id="step-3">3 <span>Details</span></div>
+    <div class="progress-step" id="step-4">4 <span>Your Info</span></div>
+    <div class="progress-step" id="step-5">5 <span>Evidence</span></div>
+    <div class="progress-step" id="step-6">6 <span>Review</span></div>
+  </div>
+
+  <div class="error-summary" id="errorSummary">
+    <h2>There is a problem</h2>
+    <ul id="errorList"></ul>
+  </div>
+
+  <form id="reportForm" enctype="multipart/form-data">
+    <div class="form-section active" id="section-1">
+      <div class="section-title">What type of issue are you reporting?</div>
+      <p class="section-hint">Select the category that best describes the road problem.</p>
+      <div class="issue-type-grid">
+        <div class="issue-card" data-val="pothole" onclick="selectIssue(this)"><span class="icon">🕳️</span>Pothole</div>
+        <div class="issue-card" data-val="flooding" onclick="selectIssue(this)"><span class="icon">🌊</span>Flooding</div>
+        <div class="issue-card" data-val="accident" onclick="selectIssue(this)"><span class="icon">💥</span>Accident</div>
+        <div class="issue-card" data-val="obstruction" onclick="selectIssue(this)"><span class="icon">🚧</span>Obstruction</div>
+        <div class="issue-card" data-val="traffic_light" onclick="selectIssue(this)"><span class="icon">🚦</span>Traffic Light</div>
+        <div class="issue-card" data-val="road_damage" onclick="selectIssue(this)"><span class="icon">🏗️</span>Road Damage</div>
+        <div class="issue-card" data-val="debris" onclick="selectIssue(this)"><span class="icon">🪨</span>Debris</div>
+        <div class="issue-card" data-val="other" onclick="selectIssue(this)"><span class="icon">⚠️</span>Other</div>
+      </div>
+      <span class="error-message" id="err-issue" style="display:none">Please select an issue type</span>
+
+      <div class="govuk-form-group" style="margin-top:20px;">
+        <label class="govuk-label">How severe is the issue?</label>
+        <div class="severity-grid">
+          <button type="button" class="severity-btn" data-sev="low" onclick="selectSeverity(this)">Low<span>Minor issue</span></button>
+          <button type="button" class="severity-btn" data-sev="medium" onclick="selectSeverity(this)">Medium<span>Needs attention</span></button>
+          <button type="button" class="severity-btn" data-sev="high" onclick="selectSeverity(this)">High<span>Urgent hazard</span></button>
+          <button type="button" class="severity-btn" data-sev="critical" onclick="selectSeverity(this)">Critical<span>Serious danger</span></button>
+        </div>
+        <span class="error-message" id="err-severity" style="display:none">Please select a severity level</span>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="govuk-button" onclick="goToStep(2)">Continue</button>
+      </div>
+    </div>
+
+    <div class="form-section" id="section-2">
+      <div class="section-title">Where is the issue located?</div>
+      <p class="section-hint">Use automatic location detection or enter the road details manually.</p>
+
+      <div id="locStatus" class="loc-status">📍 Ready to detect location</div>
+
+      <div class="location-panel">
+        <button type="button" class="govuk-button govuk-button--secondary" onclick="detectLocation()">Use my current location</button>
+        <div id="map-preview">
+          <div class="map-overlay">
+            <div class="pin">📍</div>
+            <div>Map preview will appear here after location is detected</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="road_name">Road name</label>
+        <input class="govuk-input" id="road_name" name="road_name" type="text">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="postcode">Postcode</label>
+        <input class="govuk-input" id="postcode" name="postcode" type="text">
+      </div>
+
+      <input type="hidden" id="latitude" name="latitude">
+      <input type="hidden" id="longitude" name="longitude">
+
+      <div class="btn-row">
+        <button type="button" class="govuk-button govuk-button--secondary" onclick="goToStep(1)">← Back</button>
+        <button type="button" class="govuk-button" onclick="goToStep(3)">Continue</button>
+      </div>
+    </div>
+
+    <div class="form-section" id="section-3">
+      <div class="section-title">Describe the issue</div>
+      <p class="section-hint">Tell us clearly what has happened and why it needs attention.</p>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="description">Description</label>
+        <textarea class="govuk-textarea" id="description" name="description"></textarea>
+        <span class="error-message" id="err-description" style="display:none">Please enter a description</span>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="govuk-button govuk-button--secondary" onclick="goToStep(2)">← Back</button>
+        <button type="button" class="govuk-button" onclick="goToStep(4)">Continue</button>
+      </div>
+    </div>
+
+    <div class="form-section" id="section-4">
+      <div class="section-title">Your details</div>
+      <p class="section-hint">You can report anonymously if you prefer.</p>
+
+      <div class="anon-toggle" onclick="toggleAnonymous()">
+        <div class="toggle-switch" id="anonSwitch"><div class="toggle-knob"></div></div>
+        <div><strong>Report anonymously</strong><br><span style="font-size:16px;color:#505a5f;">Your name and contact details will not be shared.</span></div>
+      </div>
+
+      <div id="contactFields">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="full_name">Full name</label>
+          <input class="govuk-input" id="full_name" name="full_name" type="text">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="email">Email address</label>
+          <input class="govuk-input" id="email" name="email" type="email">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="phone">Phone number</label>
+          <input class="govuk-input" id="phone" name="phone" type="tel">
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="govuk-button govuk-button--secondary" onclick="goToStep(3)">← Back</button>
+        <button type="button" class="govuk-button" onclick="goToStep(5)">Continue</button>
+      </div>
+    </div>
+
+    <div class="form-section" id="section-5">
+      <div class="section-title">Upload evidence</div>
+      <p class="section-hint">Add photos or short videos if available.</p>
+
+      <div class="upload-area" id="uploadArea">
+        <input type="file" id="images" name="images" accept="image/*,video/*" multiple>
+        <div class="upload-icon">📷</div>
+        <strong>Drag and drop files here, or click to upload</strong>
+        <p class="upload-hint">JPEG, PNG, GIF, WebP, MP4, MOV (max 10MB each, up to 5 files)</p>
+      </div>
+
+      <div class="image-previews" id="imagePreviews"></div>
+
+      <div class="btn-row">
+        <button type="button" class="govuk-button govuk-button--secondary" onclick="goToStep(4)">← Back</button>
+        <button type="button" class="govuk-button" onclick="goToStep(6)">Review report</button>
+      </div>
+    </div>
+
+    <div class="form-section" id="section-6">
+      <div class="section-title">Review your report</div>
+      <p class="section-hint">Check all details before submitting. You can go back to make changes.</p>
+      <table class="review-table">
+        <tbody id="reviewBody"></tbody>
+      </table>
+      <div class="inset" style="margin-top:24px;">
+        By submitting this report, you confirm the information is accurate to the best of your knowledge.
+      </div>
+      <div class="btn-row">
+        <button type="button" class="govuk-button govuk-button--secondary" onclick="goToStep(5)">← Back</button>
+        <button type="button" class="govuk-button" id="submitBtn" onclick="submitReport()">Submit report</button>
+        <div class="spinner" id="submitSpinner">
+          <div class="spin"></div> Submitting your report…
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div id="confirmation">
+    <div class="confirm-icon">✅</div>
+    <h2 style="font-size:36px;margin-bottom:12px;">Report submitted successfully</h2>
+    <p style="font-size:20px;color:var(--govuk-grey);">Your reference number is:</p>
+    <div class="confirm-ref" id="confirmRef">RW-XXXXXX</div>
+    <p style="font-size:17px;max-width:500px;margin:20px auto;">Keep this reference number safe. Our teams will review your report and respond within 24–48 hours for non-emergency issues.</p>
+    <div style="margin-top:30px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <button class="govuk-button" onclick="location.reload()">Report another issue</button>
+      <a href="help.html" class="govuk-button govuk-button--secondary">Get help</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong style="color:#fff;">RoadWatch UK</strong><br>
+      Road Issue Reporting Service<br>
+      <a href="accessibility.html">Accessibility</a> ·
+      <a href="privacy.html">Privacy Policy</a> ·
+      <a href="terms.html">Terms</a>
+    </div>
+    <div>
+      <strong style="color:#fff;">Emergency Contacts</strong><br>
+      Emergency: <strong style="color:#fff;">999</strong><br>
+      Non-emergency police: <strong style="color:#fff;">101</strong><br>
+      Highways England: <strong style="color:#fff;">0300 123 5000</strong>
+    </div>
+    <div>
+      <strong style="color:#fff;">Help</strong><br>
+      <a href="help.html">How to report</a><br>
+      <a href="faq.html">Frequently asked questions</a><br>
+      <a href="service-problem.html">Report a problem with this service</a>
+    </div>
+  </div>
+  <div style="max-width:960px;margin:20px auto 0;padding-top:20px;border-top:1px solid #3d3d3d;font-size:14px;">
+    Crown copyright 2025 — Open Government Licence v3.0
+  </div>
+</footer>
+
+<script>
+  let state = {
+    issue_type: '',
+    severity: '',
+    anonymous: false,
+    lat: null,
+    lng: null,
+    files: [],
+  };
+
+  function selectIssue(el) {
+    document.querySelectorAll('.issue-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.issue_type = el.dataset.val;
+    document.getElementById('err-issue').style.display = 'none';
+  }
+
+  function selectSeverity(el) {
+    document.querySelectorAll('.severity-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    state.severity = el.dataset.sev;
+    document.getElementById('err-severity').style.display = 'none';
+  }
+
+  function goToStep(n) {
+    const current = parseInt(document.querySelector('.form-section.active').id.replace('section-',''));
+    if (n > current) {
+      const errors = validateStep(current);
+      if (errors.length) { showErrors(errors); return; }
+    }
+
+    hideErrors();
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+    document.getElementById(`section-${n}`).classList.add('active');
+
+    document.querySelectorAll('.progress-step').forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      if (i + 1 < n) s.classList.add('done');
+      else if (i + 1 === n) s.classList.add('active');
+    });
+
+    if (n === 6) buildReview();
+  }
+
+  function validateStep(step) {
+    const errors = [];
+    if (step === 1) {
+      if (!state.issue_type) {
+        errors.push('Select an issue type');
+        document.getElementById('err-issue').style.display = 'block';
+      }
+      if (!state.severity) {
+        errors.push('Select a severity level');
+        document.getElementById('err-severity').style.display = 'block';
+      }
+    }
+    if (step === 3) {
+      const desc = document.getElementById('description').value.trim();
+      if (!desc) {
+        errors.push('Enter a description');
+        document.getElementById('err-description').style.display = 'block';
+      }
+    }
+    return errors;
+  }
+
+  function showErrors(errors) {
+    const summary = document.getElementById('errorSummary');
+    const list = document.getElementById('errorList');
+    list.innerHTML = errors.map(e => `<li>${e}</li>`).join('');
+    summary.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function hideErrors() {
+    document.getElementById('errorSummary').style.display = 'none';
+    document.getElementById('err-issue').style.display = 'none';
+    document.getElementById('err-severity').style.display = 'none';
+    document.getElementById('err-description').style.display = 'none';
+  }
+
+  function toggleAnonymous() {
+    state.anonymous = !state.anonymous;
+    document.getElementById('anonSwitch').classList.toggle('on', state.anonymous);
+    document.getElementById('contactFields').style.display = state.anonymous ? 'none' : 'block';
+  }
+
+  async function detectLocation() {
+    const status = document.getElementById('locStatus');
+    if (!navigator.geolocation) {
+      status.className = 'loc-status error';
+      status.textContent = 'Geolocation is not supported in this browser.';
+      return;
+    }
+
+    status.className = 'loc-status loading';
+    status.textContent = 'Detecting your location...';
+
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      state.lat = lat;
+      state.lng = lng;
+      document.getElementById('latitude').value = lat;
+      document.getElementById('longitude').value = lng;
+
+      status.className = 'loc-status success';
+      status.textContent = `Location detected: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+
+      document.getElementById('map-preview').innerHTML =
+        `<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${lng-0.01}%2C${lat-0.01}%2C${lng+0.01}%2C${lat+0.01}&layer=mapnik&marker=${lat}%2C${lng}"></iframe>`;
+
+      try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`);
+        const data = await response.json();
+        const road = data.address?.road || data.display_name || '';
+        const postcode = data.address?.postcode || '';
+        if (road) document.getElementById('road_name').value = road;
+        if (postcode) document.getElementById('postcode').value = postcode;
+      } catch (e) {
+        console.log('Reverse geocoding failed', e);
+      }
+    }, () => {
+      status.className = 'loc-status error';
+      status.textContent = 'Unable to retrieve your location. Please enter details manually.';
+    });
+  }
+
+  document.getElementById('images').addEventListener('change', function (e) {
+    state.files = Array.from(e.target.files).slice(0, 5);
+    renderPreviews();
+  });
+
+  function renderPreviews() {
+    const box = document.getElementById('imagePreviews');
+    box.innerHTML = '';
+    state.files.forEach((file, index) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'img-wrap';
+
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'img-remove';
+      removeBtn.innerHTML = '×';
+      removeBtn.type = 'button';
+      removeBtn.onclick = () => {
+        state.files.splice(index, 1);
+        renderPreviews();
+      };
+
+      if (file.type.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.className = 'img-thumb';
+        img.src = URL.createObjectURL(file);
+        wrap.appendChild(img);
+      } else {
+        const div = document.createElement('div');
+        div.className = 'img-thumb';
+        div.style.display = 'flex';
+        div.style.alignItems = 'center';
+        div.style.justifyContent = 'center';
+        div.style.background = '#f3f2f1';
+        div.textContent = '🎥';
+        wrap.appendChild(div);
+      }
+
+      wrap.appendChild(removeBtn);
+      box.appendChild(wrap);
+    });
+  }
+
+  function buildReview() {
+    const rows = [
+      ['Issue type', state.issue_type || 'Not provided'],
+      ['Severity', state.severity || 'Not provided'],
+      ['Road name', document.getElementById('road_name').value || 'Not provided'],
+      ['Postcode', document.getElementById('postcode').value || 'Not provided'],
+      ['Description', document.getElementById('description').value || 'Not provided'],
+      ['Anonymous', state.anonymous ? 'Yes' : 'No'],
+      ['Full name', state.anonymous ? 'Hidden' : (document.getElementById('full_name').value || 'Not provided')],
+      ['Email', state.anonymous ? 'Hidden' : (document.getElementById('email').value || 'Not provided')],
+      ['Phone', state.anonymous ? 'Hidden' : (document.getElementById('phone').value || 'Not provided')],
+      ['Files uploaded', state.files.length ? `${state.files.length} file(s)` : 'None'],
+    ];
+
+    document.getElementById('reviewBody').innerHTML = rows
+      .map(([label, value]) => `<tr><th>${label}</th><td>${value}</td></tr>`)
+      .join('');
+  }
+
+  async function submitReport() {
+    const submitBtn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('submitSpinner');
+
+    submitBtn.style.display = 'none';
+    spinner.classList.add('active');
+
+    try {
+      const formData = new FormData();
+      formData.append('issue_type', state.issue_type);
+      formData.append('severity', state.severity);
+      formData.append('description', document.getElementById('description').value.trim());
+      formData.append('road_name', document.getElementById('road_name').value.trim());
+      formData.append('postcode', document.getElementById('postcode').value.trim());
+      formData.append('latitude', state.lat || '');
+      formData.append('longitude', state.lng || '');
+      formData.append('anonymous', state.anonymous ? 'true' : 'false');
+
+      if (!state.anonymous) {
+        formData.append('full_name', document.getElementById('full_name').value.trim());
+        formData.append('email', document.getElementById('email').value.trim());
+        formData.append('phone', document.getElementById('phone').value.trim());
+      }
+
+      state.files.forEach(file => formData.append('images', file));
+
+      const res = await fetch('/api/reports', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || 'Failed to submit report');
+
+      document.getElementById('reportForm').style.display = 'none';
+      document.getElementById('confirmation').style.display = 'block';
+      document.getElementById('confirmRef').textContent = data.reference || 'RW-XXXXXX';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      alert(err.message || 'Something went wrong while submitting the report.');
+      submitBtn.style.display = 'inline-block';
+      spinner.classList.remove('active');
+    }
+  }
+</script>
+</body>
+</html>
