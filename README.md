@@ -55,8 +55,6 @@ RoadWatch UK bridges the gap between the public and authorities by enabling:
 ---
 
 ## 🏗 System Architecture
-
-```text
 Public UI (HTML/CSS/JS)
         ↓
 Express Server (Node.js)
@@ -65,6 +63,8 @@ JSON Database (File Storage)
         ↓
 Admin Dashboard (WebSocket Live Updates)
 
+
+🛠 Tech Stack
 | Layer       | Technology            |
 | ----------- | --------------------- |
 | Frontend    | HTML, CSS, JavaScript |
@@ -76,7 +76,7 @@ Admin Dashboard (WebSocket Live Updates)
 | Maps        | OpenStreetMap         |
 
 
-
+```text
 ⚙️ Installation & Setup
 git clone https://github.com/Akilan3263/Project_Public-issue-reporting-system.git
 cd Project_Public-issue-reporting-system
@@ -88,7 +88,7 @@ node server.js
 Interface	URL
 Public Reporting	http://localhost:3000
 Admin Dashboard	http://localhost:3000/admin
-
+```
 
 📁 Project Structure
 roadwatch/
